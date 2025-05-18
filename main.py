@@ -1,4 +1,5 @@
 from stats import get_num_words, get_char_map, get_sorted_char_nums
+import sys
 
 
 def get_book_test(file_path: str) -> str:
@@ -25,8 +26,8 @@ def build_report(word_count: int, char_map: dict) -> str:
 
 
 
-def main() -> None:
-    file_path: str = 'books/frankenstein.txt'
+def main(file_path: str) -> None:
+    # file_path: str = 'books/frankenstein.txt'
     file_contents: str = get_book_test(file_path)
     word_count: int = get_num_words(file_contents)
     char_map: dict = get_char_map(file_contents)
@@ -35,4 +36,11 @@ def main() -> None:
     
 
 if __name__ == '__main__':
-    main()
+    system_args = sys.argv
+    if len(system_args) == 2:
+        file_path = system_args[1]
+        main(file_path)
+        sys.exit(0)
+    else:
+        print('Usage: python3 main.py <path_to_book>')
+        sys.exit(1)
